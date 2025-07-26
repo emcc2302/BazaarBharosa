@@ -1,9 +1,30 @@
-*{
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+/* src/index.css */
+
+/* Universal Box-Sizing: Ensures padding and border are included in element's total width/height */
+*, *::before, *::after {
+  box-sizing: border-box;
 }
-html , body{
-    height: 100%;
-    width: 100%;
+
+/* HTML and Body: Remove default margins/padding and aggressively hide horizontal overflow */
+html, body {
+  margin: 0;
+  padding: 0;
+  /* Prevent horizontal scrolling for the entire document */
+  overflow-x: hidden;
+  /* Hide scrollbar visuals for various browsers */
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;     /* Firefox */
+}
+
+/* Hide scrollbar for Webkit browsers (Chrome, Safari) for html and body */
+html::-webkit-scrollbar,
+body::-webkit-scrollbar {
+  display: none;
+}
+
+/* Root div: Ensure it takes full viewport height */
+#root {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
 }

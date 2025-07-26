@@ -28,7 +28,7 @@
   right: 0;
   margin-top: 0.5rem; 
   width: 10rem; 
-  background-color: #ffffff; 
+  background-color: white; 
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   border-radius: 0.25rem;
   z-index: 10;
@@ -41,6 +41,7 @@
   background: none;
   border: none;
   cursor: pointer;
+   background-color: white;
   color: #1f2937; 
   transition: background-color 0.15s ease-in-out;
 }

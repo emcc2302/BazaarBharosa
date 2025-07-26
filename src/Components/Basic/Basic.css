@@ -15,17 +15,17 @@
 
 .spice-grid {
   display: grid;
-  grid-template-columns: 1fr;
+  grid-template-columns: 1fr; /* Default for mobile */
   gap: 1rem;
 }
 
-@media (min-width: 640px) {
+@media (min-width: 640px) { /* Small screens / tablets */
   .spice-grid {
     grid-template-columns: repeat(2, 1fr);
   }
 }
 
-@media (min-width: 768px) {
+@media (min-width: 768px) { /* Medium screens / desktops */
   .spice-grid {
     grid-template-columns: repeat(3, 1fr);
   }
@@ -59,27 +59,24 @@
   margin-bottom: 1rem;
 }
 
-/* Updated styles for the button group */
 .button-group {
   display: flex;
-  justify-content: center; /* Center the buttons within the card */
-  gap: 13rem; /* Increased gap between buttons */
+  justify-content: center;
+  gap: 1.5rem;
   margin-top: auto;
-  flex-wrap: wrap; /* Allow buttons to wrap to next line on smaller screens */
+  flex-wrap: wrap;
 }
 
 .add-to-cart-btn,
 .buy-now-btn {
-  /* Removed flex-grow: 1; to prevent them from taking full width */
-  /* Set a specific width or max-width if desired, or let content dictate */
-  padding: 0.5rem 1rem; /* Adjusted padding for a slightly larger button area */
+  padding: 0.5rem 1rem;
   border-radius: 0.25rem;
   border: none;
   cursor: pointer;
   transition: background-color 0.2s ease-in-out;
   text-align: center;
-  white-space: nowrap; /* Prevent text from wrapping inside button */
-  min-width: 100px; /* Optional: Set a minimum width for consistency */
+  white-space: nowrap;
+  min-width: 100px;
 }
 
 .add-to-cart-btn {

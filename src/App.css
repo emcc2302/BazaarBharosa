@@ -1,7 +1,15 @@
+/* src/App.css */
 
 .app {
-  min-height: 100vh; 
-  display: flex; 
+  min-height: 100vh;
+  display: flex;
   flex-direction: column;
-  font-family: sans-serif; 
+  font-family: sans-serif;
+  /* Remove scrollbar hiding from here, as it's now handled by html/body */
+  /* Remove overflow-y: auto from here unless you specifically want this div to scroll internally */
+  /* If you want this div to scroll internally without visible scrollbars, keep: */
+  /* overflow-y: auto; */
+  /* -ms-overflow-style: none; */
+  /* scrollbar-width: none; */
+  /* .app::-webkit-scrollbar { display: none; } */
 }

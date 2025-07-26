@@ -1,37 +1,73 @@
+/* src/Components/Navbar/Navbar.css */
+
 .navbar {
   background-color: #1f2937;
   color: white;
-  padding: 1rem 1.5rem;
+  padding: .1rem .5rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  position: relative;
+  z-index: 50;
 }
 
-.logo {
-  font-size: 1.25rem;
+.navbar-logo h1 {
+  font-size: 1.5rem;
   font-weight: bold;
+  margin: 0;
+  padding: 0;
+  /* background-image: linear-gradient(to right, #3A1C71, #E84545); */
+  color: white;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  /* color: transparent;
+  text-decoration: underline;
+  text-decoration-color: #E84545; */
+  /* text-decoration-thickness: 2px; */
 }
 
-.nav-links a {
+/* Hamburger Icon - Hidden by default on desktop */
+.hamburger-icon {
+  display: none; /* Hidden on desktop */
+  background: none;
+  border: none;
+  color: white;
+  font-size: 1.8rem;
+  cursor: pointer;
+  z-index: 100;
+}
+
+/* Desktop Navigation Links */
+.nav-links {
+  display: flex; /* Default desktop display */
+  margin-left: auto; /* Push to right */
+  margin-right: 1.5rem; /* Space before right section */
+  /* Remove mobile menu specific styles from here for desktop */
+}
+
+.nav-links a.desktop-nav-link { /* Target desktop links specifically */
   margin-left: 1rem;
   text-decoration: none;
   color: white;
+  padding: 0.5rem 0;
+  transition: text-decoration 0.2s ease-in-out;
 }
 
-.nav-links a:hover {
+.nav-links a.desktop-nav-link:hover {
   text-decoration: underline;
 }
 
-/* New Styles for Navbar Right Section */
+/* Right Section - Desktop Layout */
 .navbar-right-section {
   display: flex;
   align-items: center;
-  gap: 1rem; /* Space between elements */
+  gap: 1rem; /* Space between search, desktop controls, and hamburger if present */
 }
 
-/* Search Bar Styles */
+/* Search Bar Styles (common for both desktop and mobile view on main navbar) */
 .search-container {
-  display: flex;
+  display: flex; /* Always visible */
   align-items: center;
   border-radius: 0.25rem;
   overflow: hidden;
@@ -67,10 +103,21 @@
   background-color: #6b7280;
 }
 
-/* Cart Button Styles */
-.cart-button {
-  position: relative;
-  background-color: #4b5563;
+/* Wrapper for desktop-only controls */
+.desktop-only-controls {
+  display: flex; /* Show on desktop */
+  align-items: center;
+  gap: 1rem;
+}
+
+/* Cart Button, Location, Language, Signin (Desktop specific styles) */
+.cart-button,
+.location-selector,
+.language-selector,
+.signin-container { /* Target the Signin component's main container */
+  position: relative; /* For dropdowns */
+  display: inline-block; /* Or flex, depending on content */
+  background-color:transparent;
   color: white;
   border: none;
   padding: 0.5rem 0.75rem;
@@ -79,10 +126,18 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  gap: 0.5rem;
   transition: background-color 0.2s ease-in-out;
 }
 
-.cart-button:hover {
+.cart-button{
+  background-color: #6b7280;
+}
+
+.cart-button:hover,
+.location-selector .location-button:hover,
+.language-selector .language-button:hover,
+.signin-container .signin-button:hover { /* Hover for buttons within selectors */
   background-color: #6b7280;
 }
 
@@ -100,12 +155,7 @@
   text-align: center;
 }
 
-.location-selector {
-  position: relative;
-  display: inline-block; 
-}
-
-.location-button {
+.location-button , .language-button{
   background-color: #4b5563;
   color: white;
   border: none;
@@ -118,21 +168,30 @@
   transition: background-color 0.2s ease-in-out;
 }
 
-.location-button:hover {
-  background-color: #6b7280;
-}
 
-.location-dropdown {
+
+
+/* Dropdown styles (Location, Language, Signin) */
+.location-dropdown,
+.language-dropdown,
+.signin-container .dropdown-menu { /* Target Signin's dropdown menu */
   position: absolute;
-  top: 100%; 
-  left: 0;
-  background-color: #ffffff;
+  top: 100%;
+  left: 0; /* Align left with parent button */
+   background-color: #374151;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   border-radius: 0.25rem;
-  min-width: 150px; 
-  z-index: 20; 
-  margin-top: 0.5rem; 
-  overflow: hidden; 
+  min-width: 150px; /* Adjust as needed */
+  z-index: 20;
+  margin-top: 0.5rem;
+  overflow: hidden;
+  border: none;
+  color: #ffffff
+}
+
+.language-dropdown {
+  min-width: 120px; /* Specific width for language */
+  background-color: #374151;
 }
 
 .dropdown-item {
@@ -142,15 +201,136 @@
   background: none;
   border: none;
   cursor: pointer;
-  color: #1f2937; 
+  color: white;
   transition: background-color 0.15s ease-in-out;
+   
 }
 
 .dropdown-item:hover {
-  background-color: #f3f4f6; 
+  background-color: #4b5563;
 }
 
-/* .logo img{
-  height:50px;
-  width: auto;
-} */
+
+/* --- Media Queries for Mobile Devices (max-width: 768px) --- */
+@media (max-width: 768px) {
+  .navbar {
+    padding: 0.8rem 1rem;
+    justify-content: space-between;
+  }
+
+  .navbar-logo {
+    margin-right: auto; /* Pushes logo to the left */
+    margin-left: 0;
+    font-size: 1.3rem;
+  }
+
+  .hamburger-icon {
+    display: block; /* Show hamburger icon */
+    order: 3; /* Place it after right section */
+    margin-left: 1rem; /* Space from search button */
+    margin-right: 0;
+  }
+
+  /* Desktop nav links (hide on mobile) */
+  .nav-links a.desktop-nav-link {
+    display: none;
+  }
+
+  /* Mobile menu overlay */
+  .nav-links {
+    display: flex;
+    flex-direction: column;
+    position: fixed;
+    top: 60px;
+    right: 0;
+    width: 60%;
+    max-height: calc(100vh - 60px);
+    background-color: #5a5d61;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    align-items: center;
+    justify-content: flex-start;
+    z-index: 90;
+    transition: transform 0.3s ease-in-out;
+    transform: translateX(110%);
+    overflow-y: auto;
+    border-bottom-left-radius: 8px;
+    box-shadow: -5px 0 15px rgba(0, 0, 0, 0.3);
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  .nav-links::-webkit-scrollbar {
+    width: 0;
+    height: 0;
+    background: transparent;
+  }
+
+  .nav-links::-webkit-scrollbar-thumb,
+  .nav-links::-webkit-scrollbar-track {
+    background: transparent;
+    border: none;
+  }
+
+  .nav-links.nav-links-mobile-open {
+    transform: translateX(0);
+  }
+
+  .nav-links a { /* Target links within mobile menu */
+    margin: 1rem 0;
+    font-size: 1.2rem;
+    width: 100%;
+    text-align: center;
+  }
+
+  /* Hide desktop-only controls from the main navbar-right-section on mobile */
+  .desktop-only-controls {
+    display: none;
+  }
+
+  /* Adjust right section for mobile */
+  .navbar-right-section {
+    order: 2; /* Place it before hamburger, after logo */
+    margin-left: auto; /* Pushes search to the right of logo */
+    gap: 0.5rem;
+  }
+
+  /* Styles for items specifically within the mobile menu */
+  .mobile-menu-item { /* General style for items inside mobile menu */
+    display: flex; /* Ensure they are displayed */
+    width: 80%; /* Adjust width within the menu */
+    margin-bottom: 1rem; /* Add some spacing */
+    justify-content: center; /* Center content within menu item */
+  }
+
+  /* Specific adjustments for dropdowns within mobile menu */
+  .nav-links-mobile-open .language-selector,
+  .nav-links-mobile-open .location-selector,
+  .nav-links-mobile-open .signin-container { /* Target Signin container here */
+    position: static; /* Change to static in mobile menu to flow normally */
+    width: 100%;
+    box-shadow: none;
+    margin-top: 0.5rem;
+    background-color: transparent; /* Make background transparent */
+    padding: 0; /* Remove padding from button container */
+  }
+
+  /* Ensure buttons within these selectors are styled correctly */
+  .nav-links-mobile-open .language-button,
+  .nav-links-mobile-open .location-button,
+  .nav-links-mobile-open .signin-button {
+    background-color: #7d93b6; /* Darker background for buttons inside menu */
+    width: 100%;
+    justify-content: center; /* Center text/icon in button */
+  }
+
+  .nav-links-mobile-open .language-dropdown,
+  .nav-links-mobile-open .location-dropdown,
+  .nav-links-mobile-open .signin-container .dropdown-menu {
+    position: static; /* Ensure dropdowns are static within mobile menu */
+    width: 100%;
+    box-shadow: none;
+    margin-top: 0.5rem;
+    background-color: #2d3748; /* Darker background for dropdown content */
+  }
+}
