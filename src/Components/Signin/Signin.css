@@ -1,0 +1,50 @@
+
+.signin-container {
+  position: relative;
+  display: inline-block; 
+}
+
+.signin-button {
+  background-color: #4b5563;
+  color: white;
+  border: none;
+  padding: 0.5rem 0.75rem;
+  border-radius: 0.25rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  transition: background-color 0.2s ease-in-out;
+}
+
+.signin-button:hover {
+  background-color: #6b7280;
+}
+
+.dropdown-menu {
+  position: absolute;
+  top: 100%; 
+  right: 0;
+  margin-top: 0.5rem; 
+  width: 10rem; 
+  background-color: #ffffff; 
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  border-radius: 0.25rem;
+  z-index: 10;
+  overflow: hidden; 
+}
+.dropdown-button {
+  width: 100%;
+  text-align: left;
+  padding: 0.75rem 1rem;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #1f2937; 
+  transition: background-color 0.15s ease-in-out;
+}
+
+.dropdown-button:hover {
+  background-color: #f3f4f6; 
+}

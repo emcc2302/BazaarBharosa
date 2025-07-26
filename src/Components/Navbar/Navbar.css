@@ -1,0 +1,156 @@
+.navbar {
+  background-color: #1f2937;
+  color: white;
+  padding: 1rem 1.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo {
+  font-size: 1.25rem;
+  font-weight: bold;
+}
+
+.nav-links a {
+  margin-left: 1rem;
+  text-decoration: none;
+  color: white;
+}
+
+.nav-links a:hover {
+  text-decoration: underline;
+}
+
+/* New Styles for Navbar Right Section */
+.navbar-right-section {
+  display: flex;
+  align-items: center;
+  gap: 1rem; /* Space between elements */
+}
+
+/* Search Bar Styles */
+.search-container {
+  display: flex;
+  align-items: center;
+  border-radius: 0.25rem;
+  overflow: hidden;
+  background-color: #374151;
+}
+
+.search-input {
+  border: none;
+  padding: 0.5rem 0.75rem;
+  outline: none;
+  background-color: transparent;
+  color: white;
+  flex-grow: 1;
+}
+
+.search-input::placeholder {
+  color: #9ca3af;
+}
+
+.search-button {
+  background-color: #4b5563;
+  border: none;
+  color: white;
+  padding: 0.5rem 0.75rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.2s ease-in-out;
+}
+
+.search-button:hover {
+  background-color: #6b7280;
+}
+
+/* Cart Button Styles */
+.cart-button {
+  position: relative;
+  background-color: #4b5563;
+  color: white;
+  border: none;
+  padding: 0.5rem 0.75rem;
+  border-radius: 0.25rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.2s ease-in-out;
+}
+
+.cart-button:hover {
+  background-color: #6b7280;
+}
+
+.cart-badge {
+  position: absolute;
+  top: -8px;
+  right: -8px;
+  background-color: #ef4444;
+  color: white;
+  border-radius: 50%;
+  padding: 0.2rem 0.4rem;
+  font-size: 0.7rem;
+  line-height: 1;
+  min-width: 1rem;
+  text-align: center;
+}
+
+.location-selector {
+  position: relative;
+  display: inline-block; 
+}
+
+.location-button {
+  background-color: #4b5563;
+  color: white;
+  border: none;
+  padding: 0.5rem 0.75rem;
+  border-radius: 0.25rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem; 
+  transition: background-color 0.2s ease-in-out;
+}
+
+.location-button:hover {
+  background-color: #6b7280;
+}
+
+.location-dropdown {
+  position: absolute;
+  top: 100%; 
+  left: 0;
+  background-color: #ffffff;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  border-radius: 0.25rem;
+  min-width: 150px; 
+  z-index: 20; 
+  margin-top: 0.5rem; 
+  overflow: hidden; 
+}
+
+.dropdown-item {
+  width: 100%;
+  text-align: left;
+  padding: 0.75rem 1rem;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #1f2937; 
+  transition: background-color 0.15s ease-in-out;
+}
+
+.dropdown-item:hover {
+  background-color: #f3f4f6; 
+}
+
+/* .logo img{
+  height:50px;
+  width: auto;
+} */

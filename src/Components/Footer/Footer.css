@@ -1,0 +1,8 @@
+/* src/Components/Footer/Footer.css */
+
+.footer-container {
+  background-color: #1f2937; /* Equivalent to Tailwind's bg-gray-900 */
+  color: #ffffff; /* Equivalent to Tailwind's text-white */
+  padding: 1rem; /* Equivalent to Tailwind's p-4 */
+  text-align: center; /* Equivalent to Tailwind's text-center */
+}
