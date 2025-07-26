@@ -19,12 +19,20 @@ const spices = [
   { name: "Cinnamon", price: 18, img: "https://cdn.britannica.com/80/142080-050-7773CE98/Cinnamon-quills.jpg" },
 ];
 
-// Basic now receives onAddToCart prop
 export default function Basic({ onAddToCart }) {
   const handleAddToCartClick = (product) => {
     if (onAddToCart) {
-      onAddToCart(product); // Pass the entire product object
+      onAddToCart(product);
     }
+  };
+
+  const handleBuyNowClick = (product) => {
+    // In a real application, this would:
+    // 1. Add the item to a temporary cart or directly prepare for checkout.
+    // 2. Redirect to a checkout page (e.g., using React Router or window.location).
+    console.log("Buying now:", product.name, "for $", product.price.toFixed(2));
+    alert(`Proceeding to buy ${product.name} now!`); // Placeholder for demo
+    // Example: window.location.href = `/checkout?item=${product.name}&price=${product.price}`;
   };
 
   return (
@@ -35,11 +43,15 @@ export default function Basic({ onAddToCart }) {
           <div key={idx} className="spice-card">
             <img src={item.img} alt={item.name} className="spice-image" />
             <h3 className="spice-name">{item.name}</h3>
-            <p className="spice-price">${item.price.toFixed(2)}</p>
-            {/* Pass the item object to handleAddToCartClick */}
-            <button className="add-to-cart-btn" onClick={() => handleAddToCartClick(item)}>
-              Add to Cart
-            </button>
+            <p className="spice-price">₹{item.price.toFixed(2)}   1kg</p>
+            <div className="button-group"> {/* New div to group buttons */}
+              <button className="add-to-cart-btn" onClick={() => handleAddToCartClick(item)}>
+                Add to Cart
+              </button>
+              <button className="buy-now-btn" onClick={() => handleBuyNowClick(item)}>
+                Buy Now
+              </button>
+            </div>
           </div>
         ))}
       </div>

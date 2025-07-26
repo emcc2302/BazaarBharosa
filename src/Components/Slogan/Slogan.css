@@ -1,0 +1,56 @@
+/* src/Components/Slogan/Slogan.css */
+
+.slogan-container {
+  background-color: white; /* Matches your main content background */
+  color: #333; /* Default text color for the slogan */
+  padding: 0.8rem 1rem;
+  text-align: center;
+  overflow: hidden;
+  box-shadow: none;
+  margin-top: 1.5rem; /* Space from Navbar */
+  margin-bottom: 1.5rem; /* Space from content below */
+}
+
+.slogan-text {
+  margin: 0;
+  font-size: 1.5rem;
+  font-weight: 300;
+  letter-spacing: 0.05em;
+  color: #333; /* Ensure the text itself is a solid color */
+
+  /* Animation properties */
+  animation: fadeInScale 1.5s ease-out forwards;
+  opacity: 0;
+  transform: scale(0.9);
+}
+
+/* Keyframe animation remains the same */
+@keyframes fadeInScale {
+  0% {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Styles for the word "Trust" to have a gradient underline */
+.slogan-underline-gradient {
+  position: relative; /* Essential for positioning the pseudo-element */
+  display: inline-block; /* Ensures it wraps content correctly */
+  font-weight: bold; /* Make "Trust" bold as requested implicitly by <b> */
+  /* No text-decoration on the span itself */
+}
+
+.slogan-underline-gradient::after {
+  content: ''; /* Required for pseudo-elements */
+  position: absolute;
+  left: 0;
+  bottom: -3px; /* Adjust this value to control distance from text */
+  width: 100%;
+  height: 2px; /* Thickness of the underline */
+  background: linear-gradient(to right, #2B2E4A, #E84545); /* Your gradient */
+  border-radius: 1px; /* Optional: slightly rounded ends for the underline */
+}

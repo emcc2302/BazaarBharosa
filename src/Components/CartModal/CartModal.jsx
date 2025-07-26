@@ -25,7 +25,7 @@ export default function CartModal({ cartItems, onClose, onRemoveItem, onUpdateQu
                   <img src={item.img} alt={item.name} className="cart-item-image" />
                   <div className="cart-item-details">
                     <h4 className="cart-item-name">{item.name}</h4>
-                    <p className="cart-item-price">${item.price.toFixed(2)}</p>
+                    <p className="cart-item-price">₹{item.price.toFixed(2)}</p>
                     <div className="cart-item-quantity-control">
                       <button onClick={() => onUpdateQuantity(item.name, item.quantity - 1)}>
                         <FaMinus />
@@ -49,7 +49,7 @@ export default function CartModal({ cartItems, onClose, onRemoveItem, onUpdateQu
           <div className="cart-modal-footer">
             <div className="cart-total">
               <span>Total:</span>
-              <span>${totalAmount.toFixed(2)}</span>
+              <span>₹{totalAmount.toFixed(2)}</span>
             </div>
             <button className="checkout-button">Proceed to Checkout</button>
           </div>
