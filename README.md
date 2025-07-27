@@ -142,53 +142,100 @@ Sign In: Use the "Sign In" dropdown to access Vendor or Supplier login/signup fo
 Project Structure
 BazaarBharosa/
 ├── public/
+
 │   └── assets/
+
 │       └── your-logo.png  (Placeholder for your logo)
 ├── src/
+
 │   ├── App.css
+
 │   ├── App.jsx
+
 │   ├── index.css
+
 │   ├── main.jsx
+
 │   └── Components/
+
 │       ├── AuthModal/
+
 │       │   ├── AuthModal.css
+
 │       │   └── AuthModal.jsx
+
 │       ├── Basic/
+
 │       │   ├── Basic.css
+
 │       │   └── Basic.jsx
+
 │       ├── BuyNowAddressModal/
+
 │       │   ├── BuyNowAddressModal.css
+
 │       │   └── BuyNowAddressModal.jsx
+
 │       ├── CartModal/
+
 │       │   ├── CartModal.css
+
 │       │   └── CartModal.jsx
+
 │       ├── Footer/
+
 │       │   ├── Footer.css
+
 │       │   └── Footer.jsx
+
 │       ├── HelpModal/
+
 │       │   ├── HelpModal.css
+
 │       │   └── HelpModal.jsx
+
 │       ├── MyOrdersModal/
+
 │       │   ├── MyOrdersModal.css
+
 │       │   └── MyOrdersModal.jsx
+
 │       ├── Navbar/
+
 │       │   ├── Navbar.css
+
 │       │   └── Navbar.jsx
+
 │       ├── OrderConfirmationToast/
+
 │       │   ├── OrderConfirmationToast.css
+
 │       │   └── OrderConfirmationToast.jsx
+
 │       ├── Signin/
+
 │       │   ├── Signin.css
+
 │       │   └── Signin.jsx
+
 │       ├── Slogan/
+
 │       │   ├── Slogan.css
+
 │       │   └── Slogan.jsx
+
 │       └── TrackShipmentModal/
+
 │           ├── TrackShipmentModal.css
+
 │           └── TrackShipmentModal.jsx
+
 ├── .gitignore
+
 ├── package.json
+
 ├── README.md
+
 └── ... (other project files)
 
 Future Enhancements
