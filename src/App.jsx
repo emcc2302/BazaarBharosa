@@ -5,13 +5,26 @@ import Slogan from "./Components/Slogan/Slogan";
 import Basic from "./Components/Basic/Basic";
 import Footer from "./Components/Footer/Footer";
 import CartModal from "./Components/CartModal/CartModal";
-import AuthModal from "./Components/AuthModal/AuthModal"; // Ensure AuthModal is imported here
+import AuthModal from "./Components/AuthModal/AuthModal";
+import TrackShipmentModal from "./Components/TrackShipmentModal/TrackShipmentModal";
+import MyOrdersModal from "./Components/MyOrdersModal/MyOrdersModal";
+import HelpModal from "./Components/HelpModal/HelpModal";
+import OrderConfirmationToast from "./Components/OrderConfirmationToast/OrderConfirmationToast";
+import BuyNowAddressModal from "./Components/BuyNowAddressModal/BuyNowAddressModal";
 
 export default function App() {
   const [cartItems, setCartItems] = useState([]);
   const [isCartOpen, setIsCartOpen] = useState(false);
   const [currentLanguage, setCurrentLanguage] = useState('English');
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isTrackShipmentModalOpen, setIsTrackShipmentModalOpen] = useState(false); // State for Track Shipment modal
+  const [isMyOrdersModalOpen, setIsMyOrdersModalOpen] = useState(false);
+  const [isHelpModalOpen, setIsHelpModalOpen] = useState(false);
+  const [orders, setOrders] = useState([]);
+  const [searchQuery, setSearchQuery] = useState('');
+  const [showOrderConfirmation, setShowOrderConfirmation] = useState(false);
+  const [isBuyNowAddressModalOpen, setIsBuyNowAddressModalOpen] = useState(false);
+  const [productForBuyNowAddress, setProductForBuyNowAddress] = useState(null);
 
   const handleAddToCart = (product) => {
     setCartItems(prevItems => {
@@ -42,6 +55,46 @@ export default function App() {
     }
   };
 
+  const placeOrder = (itemsToOrder, source, address = null) => {
+    if (itemsToOrder.length === 0) {
+      alert("No items to place an order for!");
+      return;
+    }
+
+    const newOrder = {
+      orderId: `ORD-${Date.now().toString().slice(-6)}-${Math.floor(Math.random() * 1000).toString().padStart(3, '0')}`,
+      date: new Date().toLocaleString(),
+      items: itemsToOrder.map(item => ({
+        name: item.name,
+        translatedName: item.translations?.[currentLanguage] || item.name,
+        price: item.price,
+        quantity: item.quantity || 1,
+        img: item.img
+      })),
+      totalAmount: itemsToOrder.reduce((total, item) => total + (item.price * (item.quantity || 1)), 0),
+      status: "Processing",
+      source: source,
+      address: address
+    };
+
+    setOrders(prevOrders => [newOrder, ...prevOrders]);
+
+    setShowOrderConfirmation(true);
+    setTimeout(() => {
+      setShowOrderConfirmation(false);
+    }, 3000);
+
+    if (source === "Cart Checkout") {
+      setCartItems([]);
+      setIsCartOpen(false);
+    }
+  };
+
+  const initiateBuyNow = (product) => {
+    setProductForBuyNowAddress(product);
+    setIsBuyNowAddressModalOpen(true);
+  };
+
   return (
     <div className="app">
       <Navbar
@@ -51,9 +104,14 @@ export default function App() {
         setCurrentLanguage={setCurrentLanguage}
         isMobileMenuOpen={isMobileMenuOpen}
         setIsMobileMenuOpen={setIsMobileMenuOpen}
+        onTrackShipmentClick={() => setIsTrackShipmentModalOpen(true)} // This line opens the modal
+        onMyOrdersClick={() => setIsMyOrdersModalOpen(true)}
+        onHelpClick={() => setIsHelpModalOpen(true)}
+        searchQuery={searchQuery}
+        setSearchQuery={setSearchQuery}
       />
       <Slogan />
-      <Basic onAddToCart={handleAddToCart} currentLanguage={currentLanguage} />
+      <Basic onAddToCart={handleAddToCart} currentLanguage={currentLanguage} onInitiateBuyNow={initiateBuyNow} searchQuery={searchQuery} />
       <Footer />
 
       {isCartOpen && (
@@ -63,21 +121,50 @@ export default function App() {
           onRemoveItem={handleRemoveFromCart}
           onUpdateQuantity={handleUpdateQuantity}
           currentLanguage={currentLanguage}
+          onPlaceOrder={placeOrder}
         />
       )}
-      {/* AuthModal is rendered conditionally within Navbar, so no need to render here directly.
-          The previous error might have been caused by an accidental extra brace or token here.
-          Ensure it's NOT rendered directly here if Navbar handles its display.
-      */}
-      {/* If you *did* intend to render AuthModal here, it should look like this:
-      {showAuthModal && ( // Assuming showAuthModal state would be here in App.jsx
-        <AuthModal
-          show={showAuthModal}
-          onClose={() => setShowAuthModal(false)}
-          userType={authModalUserType}
+
+      {/* Track Shipment Modal */}
+      {isTrackShipmentModalOpen && (
+        <TrackShipmentModal
+          show={isTrackShipmentModalOpen}
+          onClose={() => setIsTrackShipmentModalOpen(false)} // This line closes the modal
+          orders={orders}
+          currentLanguage={currentLanguage}
         />
       )}
-      */}
+
+      {isMyOrdersModalOpen && (
+        <MyOrdersModal
+          show={isMyOrdersModalOpen}
+          onClose={() => setIsMyOrdersModalOpen(false)}
+          orders={orders}
+          currentLanguage={currentLanguage}
+        />
+      )}
+
+      {isHelpModalOpen && (
+        <HelpModal
+          show={isHelpModalOpen}
+          onClose={() => setIsHelpModalOpen(false)}
+          currentLanguage={currentLanguage}
+        />
+      )}
+
+      {showOrderConfirmation && (
+        <OrderConfirmationToast currentLanguage={currentLanguage} />
+      )}
+
+      {isBuyNowAddressModalOpen && (
+        <BuyNowAddressModal
+          show={isBuyNowAddressModalOpen}
+          onClose={() => setIsBuyNowAddressModalOpen(false)}
+          product={productForBuyNowAddress}
+          onPlaceOrder={placeOrder}
+          currentLanguage={currentLanguage}
+        />
+      )}
     </div>
   );
 }

@@ -1,0 +1,144 @@
+/* src/Components/BuyNowAddressModal/BuyNowAddressModal.css */
+
+.buy-now-address-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.buy-now-address-modal-content {
+  background-color: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  width: 90%;
+  max-width: 400px;
+  max-height: 80vh;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.buy-now-address-modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 1.5rem;
+  border-bottom: 1px solid #eee;
+  background-color: #f8f8f8;
+}
+
+.buy-now-address-modal-header h2 {
+  margin: 0;
+  font-size: 1.5rem;
+  color: #333;
+}
+
+.buy-now-address-modal-close-button {
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+  color: #666;
+  transition: color 0.2s ease-in-out;
+}
+
+.buy-now-address-modal-close-button:hover {
+  color: #333;
+}
+
+.buy-now-address-modal-body {
+  flex-grow: 1;
+  padding: 1.5rem;
+  overflow-y: auto;
+}
+
+.buy-now-address-modal-body .form-group {
+  margin-bottom: 0.8rem;
+}
+
+.buy-now-address-modal-body label {
+  display: block;
+  margin-bottom: 0.4rem;
+  font-weight: 500;
+  color: #555;
+}
+
+.buy-now-address-modal-body input {
+  width: 100%;
+  padding: 0.6rem 0.8rem;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 0.9rem;
+  box-sizing: border-box;
+}
+
+.buy-now-address-modal-body input:focus {
+  outline: none;
+  border-color: #3b82f6; /* Blue focus border */
+  box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.2);
+}
+
+.address-error-message {
+  color: #ef4444;
+  font-size: 0.85rem;
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+.confirm-order-button {
+  background-color: #22c55e; /* Green color */
+  color: white;
+  border: none;
+  padding: 0.75rem 1.5rem;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: 600;
+  margin-top: 1rem;
+  transition: background-color 0.2s ease-in-out;
+  width: 100%;
+}
+
+.confirm-order-button:hover {
+  background-color: #16a34a;
+}
+
+.back-button {
+  background-color: #6c757d; /* Gray for back button */
+  color: white;
+  border: none;
+  padding: 0.6rem 1.2rem;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  font-weight: 500;
+  margin-top: 0.8rem;
+  transition: background-color 0.2s ease-in-out;
+  width: 100%;
+}
+
+.back-button:hover {
+  background-color: #5a6268;
+}
+
+/* Responsive adjustments */
+@media (max-width: 600px) {
+  .buy-now-address-modal-content {
+    width: 95%;
+    margin: 1rem;
+  }
+  .buy-now-address-modal-header h2 {
+    font-size: 1.2rem;
+  }
+  .confirm-order-button, .back-button {
+    padding: 0.6rem 1rem;
+    font-size: 0.9rem;
+  }
+}

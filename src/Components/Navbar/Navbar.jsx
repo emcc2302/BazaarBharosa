@@ -1,24 +1,23 @@
-import React, { useState, useEffect, useRef } from "react"; // Import useEffect and useRef
+import React, { useState, useEffect, useRef } from "react";
 import './Navbar.css';
 import { FaUser, FaShoppingCart, FaSearch, FaMapMarkerAlt, FaGlobe, FaBars, FaTimes } from "react-icons/fa";
 import { IoMdArrowDropdown } from "react-icons/io";
 import Signin from "../Signin/Signin";
 import AuthModal from "../AuthModal/AuthModal";
 
-export default function Navbar({ cartItemCount, onCartButtonClick, currentLanguage, setCurrentLanguage, isMobileMenuOpen, setIsMobileMenuOpen }) {
+// Added searchQuery and setSearchQuery to Navbar props
+export default function Navbar({ cartItemCount, onCartButtonClick, currentLanguage, setCurrentLanguage, isMobileMenuOpen, setIsMobileMenuOpen, onTrackShipmentClick, onMyOrdersClick, onHelpClick, searchQuery, setSearchQuery }) {
   const [showSigninDropdown, setShowSigninDropdown] = useState(false);
   const [showAuthModal, setShowAuthModal] = useState(false);
   const [authModalUserType, setAuthModalUserType] = useState('');
 
-  const [searchQuery, setSearchQuery] = useState('');
+  // const [searchQuery, setSearchQuery] = useState(''); // Removed, as it's now passed from App.jsx
   const [showLocationOptions, setShowLocationOptions] = useState(false);
   const [selectedLocation, setSelectedLocation] = useState("Select Location");
   const [showLanguageOptions, setShowLanguageOptions] = useState(false);
 
-  // Ref for the mobile menu container
   const mobileMenuRef = useRef(null);
 
-  // Effect to handle clicks outside the mobile menu
   useEffect(() => {
     function handleClickOutside(event) {
       if (isMobileMenuOpen && mobileMenuRef.current && !mobileMenuRef.current.contains(event.target) && !event.target.closest('.hamburger-icon')) {
@@ -35,7 +34,6 @@ export default function Navbar({ cartItemCount, onCartButtonClick, currentLangua
     };
   }, [isMobileMenuOpen, setIsMobileMenuOpen]);
 
-  // NEW EFFECT: Close mobile menu on scroll
   useEffect(() => {
     function handleScroll() {
       if (isMobileMenuOpen) {
@@ -59,8 +57,12 @@ export default function Navbar({ cartItemCount, onCartButtonClick, currentLangua
     { code: 'Bengali', name: 'বাংলা' },
   ];
 
+  // handleSearch now just updates the searchQuery state passed from App.jsx
   const handleSearch = () => {
     console.log("Searching for:", searchQuery);
+    // The actual filtering logic will be in Basic.jsx
+    // Close mobile menu if open after initiating search
+    if (isMobileMenuOpen) setIsMobileMenuOpen(false);
   };
 
   const handleLocationSelect = (location) => {
@@ -70,15 +72,17 @@ export default function Navbar({ cartItemCount, onCartButtonClick, currentLangua
       setIsMobileMenuOpen(false);
     }
     console.log("Selected location:", location);
+    // No alert here
   };
 
   const handleLanguageSelect = (langCode) => {
-    setCurrentLanguage(langCode); // This is the crucial line that updates the language in App.jsx
+    setCurrentLanguage(langCode);
     setShowLanguageOptions(false);
     if (isMobileMenuOpen) {
       setIsMobileMenuOpen(false);
     }
     console.log("Selected language:", langCode);
+    // REMOVED ALERT FROM HERE
   };
 
   const handleLoginTypeClick = (type) => {
@@ -87,6 +91,24 @@ export default function Navbar({ cartItemCount, onCartButtonClick, currentLangua
     if (isMobileMenuOpen) {
       setIsMobileMenuOpen(false);
     }
+  };
+
+  const handleMyOrdersClick = () => {
+    if (isMobileMenuOpen) setIsMobileMenuOpen(false);
+    console.log("My Orders clicked");
+    onMyOrdersClick(); // Call the prop function to open the modal
+  };
+
+  const handleTrackShipmentClick = () => {
+    if (isMobileMenuOpen) setIsMobileMenuOpen(false);
+    console.log("Track Shipment clicked");
+    onTrackShipmentClick(); // Call the prop function to open the modal
+  };
+
+  const handleHelpClick = () => {
+    if (isMobileMenuOpen) setIsMobileMenuOpen(false);
+    console.log("Help clicked");
+    onHelpClick(); // NEW: Call the prop function to open the Help modal
   };
 
   return (
@@ -102,9 +124,9 @@ export default function Navbar({ cartItemCount, onCartButtonClick, currentLangua
       <nav ref={mobileMenuRef} className={`nav-links ${isMobileMenuOpen ? 'nav-links-mobile-open' : ''}`}>
         {/* Desktop nav links */}
         <a href="#" onClick={() => setIsMobileMenuOpen(false)} className="desktop-nav-link">Home</a>
-        <a href="#" onClick={() => setIsMobileMenuOpen(false)} className="desktop-nav-link">My Orders</a>
-        <a href="#" onClick={() => setIsMobileMenuOpen(false)} className="desktop-nav-link">Track Shipment</a>
-        <a href="#" onClick={() => setIsMobileMenuOpen(false)} className="desktop-nav-link">Help</a>
+        <a href="#" onClick={handleMyOrdersClick} className="desktop-nav-link">My Orders</a>
+        <a href="#" onClick={handleTrackShipmentClick} className="desktop-nav-link">Track Shipment</a>
+        <a href="#" onClick={handleHelpClick} className="desktop-nav-link">Help</a> {/* Added onClick */}
 
         {/* These elements are ONLY for the mobile menu when it's open */}
         {isMobileMenuOpen && (
@@ -120,7 +142,7 @@ export default function Navbar({ cartItemCount, onCartButtonClick, currentLangua
               show={showSigninDropdown}
               setShow={setShowSigninDropdown}
               onLoginClick={handleLoginTypeClick}
-              className="mobile-menu-item" // Add class for styling if needed
+              className="mobile-menu-item"
             />
 
             {/* Language Selector in Mobile Menu */}
@@ -184,8 +206,8 @@ export default function Navbar({ cartItemCount, onCartButtonClick, currentLangua
             type="text"
             placeholder="Search products..."
             className="search-input"
-            value={searchQuery}
-            onChange={(e) => setSearchQuery(e.target.value)}
+            value={searchQuery} // Pass searchQuery
+            onChange={(e) => setSearchQuery(e.target.value)} // Pass setSearchQuery
             onKeyPress={(e) => {
               if (e.key === 'Enter') {
                 handleSearch();
@@ -198,7 +220,7 @@ export default function Navbar({ cartItemCount, onCartButtonClick, currentLangua
         </div>
 
         {/* Desktop-only elements (Cart, Sign In, Language, Location) */}
-        <div className="desktop-only-controls"> {/* New wrapper for desktop-only items */}
+        <div className="desktop-only-controls">
           {/* Language Selector (Desktop Only) */}
           <div className="language-selector">
             <button
