@@ -31,7 +31,7 @@ Displays a grid of products with images, names, and prices.
 
 Shopping Cart Modal:
 
-Accessible via the cart icon in the Navbar.
+Accessible via the cart icon in the Navbar..
 
 Displays items currently in the cart with quantity controls (increase/decrease/remove).
 
